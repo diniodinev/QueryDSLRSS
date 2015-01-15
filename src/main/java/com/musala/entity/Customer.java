@@ -15,22 +15,40 @@ import javax.persistence.*;
 
 @Entity
 public class Customer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int privateId;
+    @Column
     private String firstName;
+
+    @Column
     private String lastName;
+
+    public Customer() {
+    }
+
+    public int getPrivateId() {
+        return privateId;
+    }
+
+    public void setPrivateId(int privateId) {
+        this.privateId = privateId;
+    }
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setFirstName(String fn) {
-        firstName = fn;
-    }
-
-    public void setLastName(String ln) {
-        lastName = ln;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }
