@@ -11,29 +11,35 @@ package com.musala.entity;
   * Created by dinyo.dinev on 2015.
  */
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
+import javax.annotation.Nonnull;
 
 @Entity
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int privateId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false)
+    private long id;
+
     @Column
+    @Nonnull
     private String firstName;
 
     @Column
+    @Nonnull
     private String lastName;
 
     public Customer() {
     }
 
-    public int getPrivateId() {
-        return privateId;
+    public long getId() {
+        return id;
     }
 
-    public void setPrivateId(int privateId) {
-        this.privateId = privateId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
