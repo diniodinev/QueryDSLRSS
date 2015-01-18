@@ -12,6 +12,7 @@ package com.musala.core;
  */
 
 
+import com.musala.entity.AbstractArticle;
 import com.musala.entity.Customer;
 import com.musala.entity.DnesBgNews;
 import com.musala.services.EmploeeService;
@@ -52,11 +53,13 @@ public class Main {
 //        theManager.getTransaction().commit();
 
         //Create DnesBGNews fro testing the DB
+        AbstractArticle abstractArticle = new AbstractArticle();
+
         DnesBgNews dnesBgNews = new DnesBgNews();
         dnesBgNews.setTitle("Title");
         dnesBgNews.setAuthorName("Dinio");
         dnesBgNews.setDescription("Описание");
-        dnesBgNews.setCreatedDate(Calendar.getInstance().getTime());
+        dnesBgNews.setAbstractArticle(abstractArticle);
         dnesBgNews.setNewsContent("Content of the text .Ала бала-------- текст.");
         dnesBgNews.setNewsId(112);
         dnesBgNews.setPublicationDate(Calendar.getInstance().getTime());

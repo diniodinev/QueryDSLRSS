@@ -10,8 +10,7 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "DNES_BG_NEWS")
-public class DnesBgNews extends AbstractArticle {
+public class DnesBgNews {
     @Nonnull
     @Column(name = "newsId", nullable = false)
     private long newsId;
@@ -23,6 +22,9 @@ public class DnesBgNews extends AbstractArticle {
     @CheckForNull
     @Column(name = "description", nullable = true)
     private String description;
+
+    @Id
+    private AbstractArticle abstractArticle;
 
 //    @CheckForNull
 //    @Column(name = "keyWords", nullable = true)
@@ -107,5 +109,13 @@ public class DnesBgNews extends AbstractArticle {
 
     public void setPublicationDate(@CheckForNull Date publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    public AbstractArticle getAbstractArticle() {
+        return abstractArticle;
+    }
+
+    public void setAbstractArticle(AbstractArticle abstractArticle) {
+        this.abstractArticle = abstractArticle;
     }
 }

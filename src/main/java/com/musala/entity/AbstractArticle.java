@@ -2,17 +2,19 @@ package com.musala.entity;
 
 import javax.annotation.Nonnull;
 import javax.persistence.*;
-import java.text.DateFormat;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
 /**
  * Created by Cannibal on 18.1.2015 г..
  */
-@Entity
-public abstract class AbstractArticle {
+@Embeddable
+public class AbstractArticle implements Serializable {
 
-    @Id
+
+    private static final long serialVersionUID = 1881568474980982116L;
+
     @Nonnull
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
@@ -20,7 +22,7 @@ public abstract class AbstractArticle {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createdDate", nullable = false)
-    private Date createdDate;
+    private Date createdDate = generateDate();
 
     public AbstractArticle() {
     }
@@ -34,7 +36,15 @@ public abstract class AbstractArticle {
         return createdDate;
     }
 
+    public void setId(@Nonnull long id) {
+        this.id = id;
+    }
+
     public void setCreatedDate(Date createdDate) {
-        this.createdDate = Calendar.getInstance().getTime();
+        this.createdDate = createdDate;
+    }
+
+    public Date generateDate() {
+        return  Calendar.getInstance().getTime();
     }
 }
