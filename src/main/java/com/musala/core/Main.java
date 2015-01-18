@@ -13,25 +13,58 @@ package com.musala.core;
 
 
 import com.musala.entity.Customer;
+import com.musala.entity.DnesBgNews;
+import com.musala.services.EmploeeService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+import javax.persistence.EntityManager;
 
 public class Main {
     public static void main(String[] args) {
 
-        Customer customer1 = new Customer();
-        customer1.setFirstName("Ivan");
-        customer1.setLastName("Ivanov");
-
+        //GEt custoemr from the DB
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("thePersistenceUnit");
         EntityManager theManager = factory.createEntityManager();
+
+//        EmploeeService em = new EmploeeService();
+//        em.setEntityManager(theManager);
+//        List<Customer> list = em.getCustomer("Ivanov");
+//        for(Customer c:list){
+//            System.out.println(c.getFirstName()+ " "+ c.getLastName());
+//        }
+
+//        Customer customer1 = new Customer();
+//        customer1.setFirstName("Ivan");
+//        customer1.setLastName("Ivanov");
+//
+//        EntityManagerFactory factory = Persistence.createEntityManagerFactory("thePersistenceUnit");
+//        EntityManager theManager = factory.createEntityManager();
+//        theManager.getTransaction().begin();
+//
+//
+//        theManager.persist(customer1);
+//        theManager.getTransaction().commit();
+
+        //Create DnesBGNews fro testing the DB
+        DnesBgNews dnesBgNews = new DnesBgNews();
+        dnesBgNews.setTitle("Title");
+        dnesBgNews.setAuthorName("Dinio");
+        dnesBgNews.setDescription("Описание");
+        dnesBgNews.setCreatedDate(Calendar.getInstance().getTime());
+        dnesBgNews.setNewsContent("Content of the text .Ала бала-------- текст.");
+        dnesBgNews.setNewsId(112);
+        dnesBgNews.setPublicationDate(Calendar.getInstance().getTime());
+
         theManager.getTransaction().begin();
-
-
-        theManager.persist(customer1);
+        theManager.persist(dnesBgNews);
         theManager.getTransaction().commit();
+
 
     }
 

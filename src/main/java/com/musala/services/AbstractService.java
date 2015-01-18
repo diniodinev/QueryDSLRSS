@@ -16,8 +16,11 @@ import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.EntityPath;
 
 import javax.persistence.EntityManager;
+import javax.annotation.Nonnull;
+import javax.validation.constraints.NotNull;
 
 public abstract class AbstractService {
+    @NotNull
     private EntityManager entityManager;
 
     protected JPAQuery from(EntityPath<?>... paths) {

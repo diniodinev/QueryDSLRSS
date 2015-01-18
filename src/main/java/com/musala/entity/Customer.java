@@ -11,7 +11,6 @@ package com.musala.entity;
   * Created by dinyo.dinev on 2015.
  */
 
-import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.annotation.Nonnull;
 
