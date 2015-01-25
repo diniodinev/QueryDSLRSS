@@ -17,8 +17,10 @@ import com.mysema.query.types.EntityPath;
 
 import javax.persistence.EntityManager;
 import javax.annotation.Nonnull;
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
+@MappedSuperclass
 public abstract class AbstractService {
     @NotNull
     private EntityManager entityManager;

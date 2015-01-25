@@ -10,13 +10,11 @@ import java.util.Date;
  * Created by Cannibal on 18.1.2015 г..
  */
 @Embeddable
-public class AbstractArticle implements Serializable {
-
-
+public class AbstractBaseEntity implements Serializable {
     private static final long serialVersionUID = 1881568474980982116L;
 
     @Nonnull
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false)
     private long id;
 
@@ -24,7 +22,7 @@ public class AbstractArticle implements Serializable {
     @Column(name = "createdDate", nullable = false)
     private Date createdDate = generateDate();
 
-    public AbstractArticle() {
+    public AbstractBaseEntity() {
     }
 
     @Nonnull
@@ -32,12 +30,12 @@ public class AbstractArticle implements Serializable {
         return id;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
     public void setId(@Nonnull long id) {
         this.id = id;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
     public void setCreatedDate(Date createdDate) {
@@ -45,6 +43,6 @@ public class AbstractArticle implements Serializable {
     }
 
     public Date generateDate() {
-        return  Calendar.getInstance().getTime();
+        return Calendar.getInstance().getTime();
     }
 }

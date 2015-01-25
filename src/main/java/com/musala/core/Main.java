@@ -12,37 +12,39 @@ package com.musala.core;
  */
 
 
-import com.musala.entity.AbstractArticle;
+import com.musala.entity.AbstractBaseEntity;
 import com.musala.entity.Customer;
 import com.musala.entity.DnesBgNews;
-import com.musala.services.EmploeeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
-import javax.persistence.EntityManager;
 
 public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) {
 
         //GEt custoemr from the DB
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("thePersistenceUnit");
         EntityManager theManager = factory.createEntityManager();
 
+        Customer customer1 = new Customer();
+        customer1.setFirstName("Ivan");
+        customer1.setLastName("Иванов");
+
+        theManager.getTransaction().begin();
+        theManager.persist(customer1);
+
+        theManager.getTransaction().commit();
+
 //        EmploeeService em = new EmploeeService();
 //        em.setEntityManager(theManager);
-//        List<Customer> list = em.getCustomer("Ivanov");
-//        for(Customer c:list){
-//            System.out.println(c.getFirstName()+ " "+ c.getLastName());
-//        }
 
-//        Customer customer1 = new Customer();
-//        customer1.setFirstName("Ivan");
-//        customer1.setLastName("Ivanov");
+
 //
 //        EntityManagerFactory factory = Persistence.createEntityManagerFactory("thePersistenceUnit");
 //        EntityManager theManager = factory.createEntityManager();
@@ -53,21 +55,23 @@ public class Main {
 //        theManager.getTransaction().commit();
 
         //Create DnesBGNews fro testing the DB
-        AbstractArticle abstractArticle = new AbstractArticle();
+        AbstractBaseEntity abstractBaseEntity = new AbstractBaseEntity();
+
 
         DnesBgNews dnesBgNews = new DnesBgNews();
         dnesBgNews.setTitle("Title");
-        dnesBgNews.setAuthorName("Dinio");
+        dnesBgNews.setAuthorName("Xelian");
         dnesBgNews.setDescription("Описание");
-        dnesBgNews.setAbstractArticle(abstractArticle);
-        dnesBgNews.setNewsContent("Content of the text .Ала бала-------- текст.");
+        dnesBgNews.setAbstractBaseEntity(abstractBaseEntity);
+        dnesBgNews.setNewsContent("Content of the text .Чирипаха.");
         dnesBgNews.setNewsId(112);
         dnesBgNews.setPublicationDate(Calendar.getInstance().getTime());
 
         theManager.getTransaction().begin();
         theManager.persist(dnesBgNews);
+        theManager.persist(dnesBgNews);
+        theManager.persist(dnesBgNews);
         theManager.getTransaction().commit();
-
 
     }
 

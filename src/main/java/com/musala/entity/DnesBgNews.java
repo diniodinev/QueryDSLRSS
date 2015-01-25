@@ -24,7 +24,7 @@ public class DnesBgNews {
     private String description;
 
     @Id
-    private AbstractArticle abstractArticle;
+    private AbstractBaseEntity abstractBaseEntity;
 
 //    @CheckForNull
 //    @Column(name = "keyWords", nullable = true)
@@ -111,11 +111,11 @@ public class DnesBgNews {
         this.publicationDate = publicationDate;
     }
 
-    public AbstractArticle getAbstractArticle() {
-        return abstractArticle;
+    public AbstractBaseEntity getAbstractBaseEntity() {
+        return abstractBaseEntity;
     }
 
-    public void setAbstractArticle(AbstractArticle abstractArticle) {
-        this.abstractArticle = abstractArticle;
+    public void setAbstractBaseEntity(AbstractBaseEntity abstractBaseEntity) {
+        this.abstractBaseEntity = abstractBaseEntity;
     }
 }
