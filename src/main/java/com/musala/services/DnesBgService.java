@@ -1,11 +1,13 @@
 package com.musala.services;
 
-import com.musala.entity.Customer;
-import com.musala.entity.QCustomer;
 import com.musala.entity.QDnesBgNews;
 import com.mysema.query.jpa.impl.JPAQuery;
+import com.mysema.query.sql.MySQLTemplates;
+import com.mysema.query.sql.RelationalPath;
+import com.mysema.query.sql.SQLTemplates;
+import com.mysema.query.sql.dml.SQLInsertClause;
 
-import java.util.List;
+import java.sql.Connection;
 
 /**
  * Created by Cannibal on 18.1.2015 г..
@@ -16,11 +18,6 @@ public class DnesBgService extends AbstractService {
         JPAQuery jpaQuery = from(dnesBgNews).where(dnesBgNews.newsId.eq(newsId));
         return jpaQuery.list(dnesBgNews).size() > 0;
     }
-    public void addNews(){
-//        SQLTemplates dialect;
-//        QDnesBgNews dnesBgNews = QDnesBgNews.dnesBgNews;
-//        new SQLInsertClause(conn, dialect, dnesBgNews)
-//                .columns(survey.id, dnesBgNews.name)
-//                .values(3, "Hello").execute();
-    }
+
+
 }
