@@ -10,7 +10,8 @@ import java.util.Date;
  */
 
 @Entity
-public class DnesBgNews {
+public class DnesBgNews extends BaseKeyEntity {
+    private static final long serialVersionUID = -679074804392634141L;
     @Nonnull
     @Column(name = "newsId", nullable = false)
     private long newsId;
@@ -23,9 +24,6 @@ public class DnesBgNews {
     @Column(name = "description", nullable = true)
     private String description;
 
-    @Id
-    private AbstractBaseEntity abstractBaseEntity;
-
 //    @CheckForNull
 //    @Column(name = "keyWords", nullable = true)
 //    private List<String> keyWords;
@@ -34,10 +32,6 @@ public class DnesBgNews {
     @Lob
     @Column(name = "content")
     private String newsContent;
-
-    @CheckForNull
-    @Column(name = "authorName", nullable = true)
-    private String authorName;
 
     @CheckForNull
     @Temporal(TemporalType.TIMESTAMP)
@@ -75,15 +69,6 @@ public class DnesBgNews {
         this.description = description;
     }
 
-//    @CheckForNull
-//    public List<String> getKeyWords() {
-//        return keyWords;
-//    }
-//
-//    public void setKeyWords(@CheckForNull List<String> keyWords) {
-//        this.keyWords = keyWords;
-//    }
-
     @Nonnull
     public String getNewsContent() {
         return newsContent;
@@ -94,28 +79,11 @@ public class DnesBgNews {
     }
 
     @CheckForNull
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    public void setAuthorName(@CheckForNull String authorName) {
-        this.authorName = authorName;
-    }
-
-    @CheckForNull
     public Date getPublicationDate() {
         return publicationDate;
     }
 
     public void setPublicationDate(@CheckForNull Date publicationDate) {
         this.publicationDate = publicationDate;
-    }
-
-    public AbstractBaseEntity getAbstractBaseEntity() {
-        return abstractBaseEntity;
-    }
-
-    public void setAbstractBaseEntity(AbstractBaseEntity abstractBaseEntity) {
-        this.abstractBaseEntity = abstractBaseEntity;
     }
 }

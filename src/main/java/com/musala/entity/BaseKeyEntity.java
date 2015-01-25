@@ -9,12 +9,13 @@ import java.util.Date;
 /**
  * Created by Cannibal on 18.1.2015 г..
  */
-@Embeddable
-public class AbstractBaseEntity implements Serializable {
+@MappedSuperclass
+public class BaseKeyEntity implements Serializable {
     private static final long serialVersionUID = 1881568474980982116L;
 
     @Nonnull
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private long id;
 
@@ -22,7 +23,7 @@ public class AbstractBaseEntity implements Serializable {
     @Column(name = "createdDate", nullable = false)
     private Date createdDate = generateDate();
 
-    public AbstractBaseEntity() {
+    public BaseKeyEntity() {
     }
 
     @Nonnull

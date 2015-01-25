@@ -12,7 +12,7 @@ package com.musala.core;
  */
 
 
-import com.musala.entity.AbstractBaseEntity;
+import com.musala.entity.BaseKeyEntity;
 import com.musala.entity.Customer;
 import com.musala.entity.DnesBgNews;
 import org.slf4j.Logger;
@@ -32,16 +32,7 @@ public class Main {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("thePersistenceUnit");
         EntityManager theManager = factory.createEntityManager();
 
-        Customer customer1 = new Customer();
-        customer1.setFirstName("Ivan");
-        customer1.setLastName("Иванов");
-
-        theManager.getTransaction().begin();
-        theManager.persist(customer1);
-
-        theManager.getTransaction().commit();
-
-//        EmploeeService em = new EmploeeService();
+       //        EmploeeService em = new EmploeeService();
 //        em.setEntityManager(theManager);
 
 
@@ -55,14 +46,12 @@ public class Main {
 //        theManager.getTransaction().commit();
 
         //Create DnesBGNews fro testing the DB
-        AbstractBaseEntity abstractBaseEntity = new AbstractBaseEntity();
+        BaseKeyEntity baseKeyEntity = new BaseKeyEntity();
 
 
         DnesBgNews dnesBgNews = new DnesBgNews();
         dnesBgNews.setTitle("Title");
-        dnesBgNews.setAuthorName("Xelian");
         dnesBgNews.setDescription("Описание");
-        dnesBgNews.setAbstractBaseEntity(abstractBaseEntity);
         dnesBgNews.setNewsContent("Content of the text .Чирипаха.");
         dnesBgNews.setNewsId(112);
         dnesBgNews.setPublicationDate(Calendar.getInstance().getTime());
