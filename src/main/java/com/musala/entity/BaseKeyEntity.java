@@ -1,7 +1,10 @@
 package com.musala.entity;
 
 import javax.annotation.Nonnull;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,26 +16,17 @@ import java.util.Date;
 public class BaseKeyEntity implements Serializable {
     private static final long serialVersionUID = 1881568474980982116L;
 
-    @Nonnull
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false)
-    private long id;
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createdDate", nullable = false)
+    @Nonnull
     private Date createdDate = generateDate();
 
-    public BaseKeyEntity() {
-    }
-
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "lastModified", nullable = false)
     @Nonnull
-    public long getId() {
-        return id;
-    }
+    private Date lastModified = new Date();
 
-    public void setId(@Nonnull long id) {
-        this.id = id;
+    public BaseKeyEntity() {
     }
 
     public Date getCreatedDate() {
@@ -45,5 +39,13 @@ public class BaseKeyEntity implements Serializable {
 
     public Date generateDate() {
         return Calendar.getInstance().getTime();
+    }
+
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
     }
 }

@@ -10,11 +10,13 @@ import java.util.Date;
  */
 
 @Entity
-public class DnesBgNews extends BaseKeyEntity {
+public class DnesBgNewsEntity extends BaseKeyEntity {
     private static final long serialVersionUID = -679074804392634141L;
+
     @Nonnull
-    @Column(name = "newsId", nullable = false)
-    private long newsId;
+    @Id
+    @Column(name = "newsUrl", nullable = false)
+    private String newsUrl;
 
     @Nonnull
     @Column(name = "title", nullable = false)
@@ -24,9 +26,9 @@ public class DnesBgNews extends BaseKeyEntity {
     @Column(name = "description", nullable = true)
     private String description;
 
-//    @CheckForNull
-//    @Column(name = "keyWords", nullable = true)
-//    private List<String> keyWords;
+    @CheckForNull
+    @Column(name = "author", nullable = true)
+    private String author;
 
     @Nonnull
     @Lob
@@ -39,16 +41,16 @@ public class DnesBgNews extends BaseKeyEntity {
     private Date publicationDate;
 
 
-    public DnesBgNews() {
+    public DnesBgNewsEntity() {
     }
 
     @Nonnull
-    public long getNewsId() {
-        return newsId;
+    public String getNewsUrl() {
+        return newsUrl;
     }
 
-    public void setNewsId(@Nonnull long newsId) {
-        this.newsId = newsId;
+    public void setNewsUrl(@Nonnull String newsUrl) {
+        this.newsUrl = newsUrl;
     }
 
     @Nonnull
@@ -85,5 +87,14 @@ public class DnesBgNews extends BaseKeyEntity {
 
     public void setPublicationDate(@CheckForNull Date publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    @CheckForNull
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(@CheckForNull String author) {
+        this.author = author;
     }
 }

@@ -13,8 +13,8 @@ package com.musala.core;
 
 
 import com.musala.dao.DnesBgDaoImpl;
-import com.musala.dao.ProcessHtmlPage;
-import com.musala.entity.DnesBgNews;
+import com.musala.dao.ProcessDnesBgHtmlPage;
+import com.musala.entity.DnesBgNewsEntity;
 import com.musala.services.EmploeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,29 +56,63 @@ public class Main {
 
         //Create DnesBGNews fro testing the DB
 
-        DnesBgNews dnesBgNews = new DnesBgNews();
-        dnesBgNews.setTitle("Title");
-        dnesBgNews.setDescription("Описание");
-        dnesBgNews.setNewsContent("Content of the text .Чирипаха.");
-        dnesBgNews.setNewsId(112);
-        dnesBgNews.setPublicationDate(Calendar.getInstance().getTime());
-//
+//        DnesBgNewsEntity dnesBgNews = new DnesBgNewsEntity();
+//        dnesBgNews.setTitle("Title");
+//        dnesBgNews.setDescription("Описание");
+//        dnesBgNews.setNewsContent("Content of the text .Чирипаха.");
+//        dnesBgNews.setPublicationDate(Calendar.getInstance().getTime());
+////
 //        theManager.getTransaction().begin();
 //        theManager.persist(dnesBgNews);
 //
 //        theManager.getTransaction().commit();
 
 
-        ProcessHtmlPage processHtmlPage = new ProcessHtmlPage();
 
-        String text = processHtmlPage.readNewsText("http://www.dnes.bg/world/2015/01/25/lavrov-prizova-es-za-natisk-vyrhu-kiev.252390");
 
-        if (text != null) {
-            dnesBgNews.setNewsContent(text);
-        }
+
+        String tagName = "#article_text";
+        String titleTag = "h1.title";
+        String descriptionTag = "div.descr";
         DnesBgDaoImpl dnesBgDao = new DnesBgDaoImpl();
-        dnesBgDao.insert(dnesBgNews, entityManager);
+        for (int i = 252723; i >= 1000; i--) {
+            try {
 
+                DnesBgNewsEntity dnesBgNewsEntity = new DnesBgNewsEntity();
+                dnesBgNewsEntity.setPublicationDate(Calendar.getInstance().getTime());
+
+                String url = "http://www.dnes.bg/world/2015/01/25/page." + i;
+                ProcessDnesBgHtmlPage processDnesBgHtmlPage = new ProcessDnesBgHtmlPage(url);
+
+                //String url = "http://www.dnes.bg/world/2015/01/25/lavrov-prizova-es-za-natisk-vyrhu-kiev.252390";
+
+
+                String text = processDnesBgHtmlPage.extractInformationByTag(tagName);
+
+                if (text != null) {
+                    dnesBgNewsEntity.setNewsContent(text);
+                }
+
+
+                dnesBgNewsEntity.setTitle(processDnesBgHtmlPage.extractInformationByTag(titleTag));
+
+
+                dnesBgNewsEntity.setDescription(processDnesBgHtmlPage.extractInformationByTag(descriptionTag));
+
+                dnesBgNewsEntity.setNewsUrl(url);
+
+                dnesBgNewsEntity.setAuthor(processDnesBgHtmlPage.extractAuthor());
+
+                dnesBgDao.insert(dnesBgNewsEntity, entityManager);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } catch (Throwable e) {
+                System.out.println("Error" + i);
+            }
+        }
     }
 
 }
